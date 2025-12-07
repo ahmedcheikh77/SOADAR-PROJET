@@ -1,0 +1,43 @@
+module MedicalDME {
+    module Corba {
+
+        struct Patient {
+            string patientId;
+            string firstName;
+            string lastName;
+            string dateOfBirth;
+            string gender;
+        };
+
+        struct MedicalRecord {
+            string recordId;
+            Patient patient;
+            sequence<Consultation> consultations;
+            sequence<Prescription> prescriptions;
+        };
+
+        struct Consultation {
+            string consultationId;
+            string date;
+            string doctorId;
+            string symptoms;
+            string diagnosis;
+        };
+
+        struct Prescription {
+            string prescriptionId;
+            string medication;
+            string dosage;
+            string frequency;
+            string startDate;
+            string endDate;
+        };
+
+        interface MedicalRecordService {
+            MedicalRecord getMedicalRecord(in string patientId);
+            boolean updateMedicalRecord(in MedicalRecord record);
+            string addConsultation(in string patientId, in Consultation consultation);
+            sequence<string> getAllPatientIds();
+        };
+    };
+};

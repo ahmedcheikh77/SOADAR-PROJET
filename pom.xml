@@ -1,0 +1,20 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.medical.dme</groupId>
+  <artifactId>MedicalDME-System</artifactId>
+  <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>Archetype - MedicalDME-System</name>
+  <url>http://maven.apache.org</url>
+    <modules>
+        <module>medical-dme-parent</module>
+        <module>medical-dme-parent/medical-dme-soap-service</module>
+        <module>medical-dme-parent/medical-dme-rest-service</module>
+        <module>medical-dme-parent/medical-dme-distributed-core</module>
+        <module>medical-dme-parent/medical-dme-persistence</module>
+        <module>medical-dme-parent/medical-dme-web-client</module>
+        <module>medical-dme-parent/medical-dme-mobile-client</module>
+        <module>medical-dme-parent/medical-dme-common</module>
+    </modules>
+</project>

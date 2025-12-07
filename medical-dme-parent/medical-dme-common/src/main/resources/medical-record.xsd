@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://medical.dme.com/records"
+           xmlns:med="http://medical.dme.com/records"
+           elementFormDefault="qualified">
+
+    <xs:element name="medicalRecord">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="patient" type="med:patientType"/>
+                <xs:element name="consultations" type="med:consultationListType"/>
+                <xs:element name="prescriptions" type="med:prescriptionListType"/>
+                <xs:element name="allergies" type="med:allergyListType"/>
+            </xs:sequence>
+            <xs:attribute name="recordId" type="xs:string" use="required"/>
+            <xs:attribute name="creationDate" type="xs:dateTime"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="patientType">
+        <xs:sequence>
+            <xs:element name="patientId" type="xs:string"/>
+            <xs:element name="firstName" type="xs:string"/>
+            <xs:element name="lastName" type="xs:string"/>
+            <xs:element name="dateOfBirth" type="xs:date"/>
+            <xs:element name="gender" type="med:genderType"/>
+            <xs:element name="contact" type="med:contactType"/>
+            <xs:element name="emergencyContact" type="med:contactType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="genderType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="MALE"/>
+            <xs:enumeration value="FEMALE"/>
+            <xs:enumeration value="OTHER"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="contactType">
+        <xs:sequence>
+            <xs:element name="email" type="xs:string"/>
+            <xs:element name="phone" type="xs:string"/>
+            <xs:element name="address" type="med:addressType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="addressType">
+        <xs:sequence>
+            <xs:element name="street" type="xs:string"/>
+            <xs:element name="city" type="xs:string"/>
+            <xs:element name="postalCode" type="xs:string"/>
+            <xs:element name="country" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="consultationListType">
+        <xs:sequence>
+            <xs:element name="consultation" type="med:consultationType"
+                        maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="consultationType">
+        <xs:sequence>
+            <xs:element name="date" type="xs:dateTime"/>
+            <xs:element name="doctorId" type="xs:string"/>
+            <xs:element name="symptoms" type="xs:string"/>
+            <xs:element name="diagnosis" type="xs:string"/>
+            <xs:element name="notes" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="consultationId" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="prescriptionListType">
+        <xs:sequence>
+            <xs:element name="prescription" type="med:prescriptionType"
+                        maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="prescriptionType">
+        <xs:sequence>
+            <xs:element name="medication" type="xs:string"/>
+            <xs:element name="dosage" type="xs:string"/>
+            <xs:element name="frequency" type="xs:string"/>
+            <xs:element name="startDate" type="xs:date"/>
+            <xs:element name="endDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="instructions" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="prescriptionId" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="allergyListType">
+        <xs:sequence>
+            <xs:element name="allergy" type="med:allergyType"
+                        maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="allergyType">
+        <xs:sequence>
+            <xs:element name="substance" type="xs:string"/>
+            <xs:element name="severity" type="med:severityType"/>
+            <xs:element name="reaction" type="xs:string"/>
+            <xs:element name="diagnosisDate" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="severityType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="MILD"/>
+            <xs:enumeration value="MODERATE"/>
+            <xs:enumeration value="SEVERE"/>
+            <xs:enumeration value="LIFE_THREATENING"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
